@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block main %}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                {% for category in categories %}
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                                    href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                Column
+            </div>
+            <div class="col">
+                Column
+            </div>
+        </div>
+    </div>
+{% endblock main %}
