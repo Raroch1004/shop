@@ -1,6 +1,8 @@
 from django.views.generic import ListView
+from .serializers import ProductSerializer, CategorySerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from .models import Category
+from .models import Category, Product
 
 
 class Index(ListView):
@@ -29,3 +31,27 @@ class Categories(ListView):
         print(categories)
 
         return categories
+
+
+class ProductAPI(ListAPIView):
+    """Выдача продуктов по API"""
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductAPIDetail(RetrieveAPIView):
+    """Выдача продукта по API"""
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class CategoryAPI(ListAPIView):
+    """Выдача всех категорий по API"""
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class CategoryAPIDetail(RetrieveAPIView):
+    """Выдача категории по API"""
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

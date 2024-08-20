@@ -15,10 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
     def get_products_count(self, obj):
-        if obj.products:
-            return len(obj.products.all())
-        else:
-            return '0'
+        return len(obj.products.all())
 
     get_products_count.short_description = 'Количество товаров'
 
