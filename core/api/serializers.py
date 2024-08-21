@@ -1,5 +1,7 @@
 from core.models import Product, Category
-from rest_framework import serializers
+from rest_framework import serializers, generics
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -16,3 +18,4 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('title', 'slug')
+
