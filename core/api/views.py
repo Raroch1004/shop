@@ -1,25 +1,23 @@
 from rest_framework.filters import SearchFilter
+from django_filters import rest_framework as filters
+
+from .filters import ProductFilter, CategoryFilter
 from .serializers import ProductSerializer, CategorySerializer
-from rest_framework import viewsets, filters
+from rest_framework import viewsets
 from ..models import Product, Category
-
-
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     """Выдача продуктов по api"""
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filter_fields = ['title']
-    search_fields = ['price', 'created_at', 'title']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ProductFilter
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """Выдача всех категорий по api"""
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filter_fields = ['title']
-    search_fields = ['title', 'slug']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = CategoryFilter

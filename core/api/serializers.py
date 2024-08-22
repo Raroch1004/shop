@@ -1,7 +1,5 @@
 from core.models import Product, Category
-from rest_framework import serializers, generics
-
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import serializers
 
 
 class ProductSerializer(serializers.ModelSerializer):
