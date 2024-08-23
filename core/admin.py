@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Productimage
+from .models import Product, Category, Productimage, Cart, CartItem, OrderItem, Order
 from django.utils.safestring import mark_safe
 
 
@@ -38,5 +38,35 @@ class ProductAdmin(admin.ModelAdmin):
     get_photo.short_description = 'Миниатюра'
 
 
-admin.site.register(Productimage)
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 1
 
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'created_at', 'updated_at')
+    inlines = [CartItemInline]
+
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart', 'product', 'quantity')
+    list_filter = ('cart', 'product')
+    search_fields = ('product__title',)
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'full_title', 'email', 'created_at', 'status')
+    list_filter = ('status', 'created_at')
+    search_fields = ('full_name', 'email', 'address')
+    inlines = [OrderItemInline]
+
+
+admin.site.register(Productimage)
