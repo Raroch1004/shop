@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from jazzmin.templatetags.jazzmin import User
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
