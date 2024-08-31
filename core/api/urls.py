@@ -8,12 +8,17 @@ router = routers.SimpleRouter()
 router.register(r'products', ProductViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'carts', CartViewSet, basename='cart')
+router.register(r'orders', OrderViewSet, basename='order')
 
-# Создаем вложенный роутер для элементов корзины
+
 carts_router = NestedSimpleRouter(router, r'carts', lookup='cart')
 carts_router.register(r'cart-items', CartItemViewSet, basename='cart-cart-items')
+
+order_router = NestedSimpleRouter(router, r'orders', lookup='order')
+order_router.register(r'order-items', OrderItemViewSet, basename='order-items')
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/', include(carts_router.urls)),
+    path('api/', include(order_router.urls)),
 ]

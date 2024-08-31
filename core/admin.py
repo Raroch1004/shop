@@ -69,4 +69,11 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
 
 
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('order', 'product', 'quantity', 'price')
+    list_filter = ('order', 'product')
+    search_fields = ('product__title',)
+
+
 admin.site.register(Productimage)
