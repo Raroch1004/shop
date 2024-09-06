@@ -1,7 +1,6 @@
 from django.views.generic import ListView
 
-
-from .models import Category
+from core.models import Category
 
 
 class Index(ListView):

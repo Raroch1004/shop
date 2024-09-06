@@ -147,5 +147,3 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = 'Товар в заказе'
         verbose_name_plural = 'Товары в заказе'
-
-
